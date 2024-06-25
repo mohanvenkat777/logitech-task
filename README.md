@@ -1,6 +1,11 @@
-# LigitechTask
+# logitechTask
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
+
+# Before rent the project follow the below steps
+
+Install Node 18
+Execute command on project root folder (npm install)
 
 ## Development server
 

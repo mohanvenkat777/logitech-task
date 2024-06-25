@@ -1,0 +1,63 @@
+<section>
+    <div class="container">
+        <div class="tab">
+            <!-- Large device Item Controls :: START -->
+            <ng-container *ngIf="deviceType == 'large'">
+                <div class="tab__controles">
+                    <button type="button" title="Prev Item" (click)="activatePrevItem()"
+                        [disabled]="this.currentItemId == 0 || itemList?.length == 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path
+                                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
+                        </svg>
+                    </button>
+                    <div class="tab__controles__nav">
+                        <ng-container *ngFor="let item of itemList;let i = index;">
+                            <button type="button" [title]="item?.title" [class.active]="this.currentItemId == i"
+                                (click)="activateCurrentItem(i)">
+                                {{ item?.title }}
+                            </button>
+                        </ng-container>
+                    </div>
+                    <button type="button" title="Next Item" (click)="activateNextItem()"
+                        [disabled]="(this.currentItemId + 1) == itemList?.length || itemList?.length == 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path
+                                d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
+                        </svg>
+                    </button>
+                </div>
+            </ng-container>
+            <!-- Large device Item Controls :: END -->
+            <ng-container *ngFor="let item of itemList;let i = index;">
+                <ng-container *ngIf="deviceType == 'large';else smallDeviceItemView">
+                    <!-- Large device Item view :: START -->
+                    <ng-container *ngIf="i == currentItemId">
+                        <div class="tab__content">
+                            <h4>{{item?.title}}</h4>
+                            <p>{{ item?.content }}</p>
+                            <div class="tab__content__delete">
+                                <button type="button" title="Delete {{item?.title}}"
+                                    (click)="deleteItem(i)">Delete</button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <!-- Large device Item view :: END -->
+                </ng-container>
+                <!-- Small device Item view :: START -->
+                <ng-template #smallDeviceItemView>
+                    <div class="tab__content">
+                        <h4>{{item?.title}}</h4>
+                        <p>{{ item?.content }}</p>
+                        <div class="tab__content__delete">
+                            <button type="button" title="Delete {{item?.title}}" (click)="deleteItem(i)">Delete</button>
+                        </div>
+                    </div>
+                </ng-template>
+                <!-- Small device Item view :: END -->
+            </ng-container>
+            <hr>
+            <button type="button" (click)="resetListItems()" title="Reset Item">Reset</button>
+        </div>
+    </div>
+</section>
